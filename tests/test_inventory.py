@@ -1,6 +1,6 @@
 from builtins import len
 from unittest import TestCase
-from ..inventory import Inventory
+from inventory import Inventory
 
 branch_inventory_capacity = "R1,4C,1,3A,2,2P,1,100,200,200,100,100"
 order = "R1,2020-12-08 21:15:31,ORDER1,BLT,LT,VLT"
@@ -85,5 +85,16 @@ class InventoryTest(TestCase):
         inventory_capacity = "R1,4C,1,3A,2,2P,1,100,0,200,100,100"
         _inventory = Inventory(inventory_capacity)
         self.assertEqual(_inventory.process_order(_order), 'R1,ORDER1,REJECTED')
+
+    def test_process_order(self):
+        inventory_capacity = "R1,3C,2,2A,5,1P,3,100,200,200,100,100"
+        _inventory = Inventory(inventory_capacity, limit_time=50)
+        order1 = "R1,2020-12-08 21:15:31,ORDER1,BLT,LT,VLT"
+        order2 = "R1,2020-12-08 19:25:17,ORDER2,VT,VLT"
+        self.assertEqual(_inventory.process_order(order1), 'R1,ORDER1,ACCEPTED,44.0')
+        self.assertEqual(_inventory.process_order(order2), 'R1,ORDER2,REJECTED')
+
+
+
 
 

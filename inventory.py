@@ -56,11 +56,11 @@ class Inventory:
             for material in food[1:]:
                 if not self.is_material_inventory_has_capacity(material):
                     return self.log_rejected_order(order)
-                # start the process
+            # start the process
             food_process_time = self.calculate_process_time()
             order_process_time += food_process_time
             self.increase_burger_capacity_waiting_time()
-        if order_process_time > 20:
+        if order_process_time > self.limit_time:
             self.restore_prev_state_of_burger_capacity(
                 (burger_cook_cap ,burger_ass_cap, burger_pack_cap))
             return self.log_rejected_order(order)
