@@ -9,6 +9,8 @@ each order comes as a new line of strings formatted in a particular format.
 
 `R1,2020-12-08 21:15:31,ORDER1,BLT,LT,VLT`
 
+input file is exist in main directory as input.txt
+
 ###branch capacity
 is a new line of strings formatted in a particular format.
 
